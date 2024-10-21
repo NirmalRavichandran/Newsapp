@@ -3,7 +3,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'signup_screen.dart';
-import 'home_screen.dart'; // Import the HomeScreen
+import 'home_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -17,7 +17,8 @@ class _LoginScreenState extends State<LoginScreen> {
 
   Future<void> _login() async {
     if (_formKey.currentState!.validate()) {
-      final url = Uri.parse("https://eeac-2402-3a80-45b0-6992-a0b8-8d6b-f5f6-a017.ngrok-free.app/login");
+      final url = Uri.parse(
+          "https://eeac-2402-3a80-45b0-6992-a0b8-8d6b-f5f6-a017.ngrok-free.app/login");
 
       final response = await http.post(
         url,
@@ -38,7 +39,6 @@ class _LoginScreenState extends State<LoginScreen> {
         SharedPreferences prefs = await SharedPreferences.getInstance();
         prefs.setString('email', _emailController.text);
 
-        // Navigate to HomeScreen
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(builder: (context) => HomeScreen()),
@@ -60,7 +60,8 @@ class _LoginScreenState extends State<LoginScreen> {
           var begin = Offset(1.0, 0.0);
           var end = Offset.zero;
           var curve = Curves.easeInOut;
-          var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+          var tween =
+              Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
           return SlideTransition(
             position: animation.drive(tween),
             child: child,
@@ -111,8 +112,9 @@ class _LoginScreenState extends State<LoginScreen> {
                             controller: _emailController,
                             label: 'Email',
                             icon: Icons.email,
-                            validator: (value) =>
-                                value!.isEmpty ? 'Please enter your email' : null,
+                            validator: (value) => value!.isEmpty
+                                ? 'Please enter your email'
+                                : null,
                           ),
                           const SizedBox(height: 16),
                           _buildTextField(
@@ -120,8 +122,9 @@ class _LoginScreenState extends State<LoginScreen> {
                             label: 'Password',
                             icon: Icons.lock,
                             obscureText: true,
-                            validator: (value) =>
-                                value!.isEmpty ? 'Please enter your password' : null,
+                            validator: (value) => value!.isEmpty
+                                ? 'Please enter your password'
+                                : null,
                           ),
                           const SizedBox(height: 24),
                           ElevatedButton(
@@ -129,7 +132,8 @@ class _LoginScreenState extends State<LoginScreen> {
                             style: ElevatedButton.styleFrom(
                               foregroundColor: Colors.white,
                               backgroundColor: Colors.blue,
-                              padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 12),
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 32, vertical: 12),
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(30),
                               ),

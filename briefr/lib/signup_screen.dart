@@ -18,10 +18,9 @@ class _SignupScreenState extends State<SignupScreen> {
 
   Future<void> _signup() async {
     if (_formKey.currentState!.validate()) {
-      
-      final url = Uri.parse("https://eeac-2402-3a80-45b0-6992-a0b8-8d6b-f5f6-a017.ngrok-free.app/signup");
+      final url = Uri.parse(
+          "https://eeac-2402-3a80-45b0-6992-a0b8-8d6b-f5f6-a017.ngrok-free.app/signup");
 
-      
       final response = await http.post(
         url,
         headers: {
@@ -34,20 +33,19 @@ class _SignupScreenState extends State<SignupScreen> {
         }),
       );
 
-      
       if (response.statusCode == 201) {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(content: Text('Signup Successful')),
         );
 
-        
         SharedPreferences prefs = await SharedPreferences.getInstance();
         prefs.setString('email', _emailController.text);
         prefs.setString('username', _usernameController.text);
 
-        Navigator.pop(context); 
+        Navigator.pop(context);
       } else {
-        final errorMessage = jsonDecode(response.body)['error'] ?? 'Error during signup';
+        final errorMessage =
+            jsonDecode(response.body)['error'] ?? 'Error during signup';
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text(errorMessage)),
         );
@@ -96,8 +94,9 @@ class _SignupScreenState extends State<SignupScreen> {
                             controller: _usernameController,
                             label: 'Username',
                             icon: Icons.person,
-                            validator: (value) =>
-                                value!.isEmpty ? 'Please enter a username' : null,
+                            validator: (value) => value!.isEmpty
+                                ? 'Please enter a username'
+                                : null,
                           ),
                           const SizedBox(height: 16),
                           _buildTextField(
@@ -113,8 +112,9 @@ class _SignupScreenState extends State<SignupScreen> {
                             label: 'Password',
                             icon: Icons.lock,
                             obscureText: true,
-                            validator: (value) =>
-                                value!.isEmpty ? 'Please enter a password' : null,
+                            validator: (value) => value!.isEmpty
+                                ? 'Please enter a password'
+                                : null,
                           ),
                           const SizedBox(height: 24),
                           ElevatedButton(
@@ -122,7 +122,8 @@ class _SignupScreenState extends State<SignupScreen> {
                             style: ElevatedButton.styleFrom(
                               foregroundColor: Colors.white,
                               backgroundColor: Colors.blue,
-                              padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 12),
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 32, vertical: 12),
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(30),
                               ),

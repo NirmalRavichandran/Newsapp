@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-//import 'dart:html' as html; 
-import 'package:flutter/foundation.dart' show kIsWeb; 
-import 'package:url_launcher/url_launcher.dart'; 
+//import 'dart:html' as html;
+import 'package:flutter/foundation.dart' show kIsWeb;
+import 'package:url_launcher/url_launcher.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -20,7 +20,7 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     super.initState();
     _loadUserEmail();
-    _fetchNewsByCategory('general'); 
+    _fetchNewsByCategory('general');
   }
 
   Future<void> _loadUserEmail() async {
@@ -50,7 +50,8 @@ class _HomeScreenState extends State<HomeScreen> {
         });
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Failed to fetch news: ${response.statusCode}')),
+          SnackBar(
+              content: Text('Failed to fetch news: ${response.statusCode}')),
         );
         setState(() {
           isLoading = false;
@@ -78,12 +79,14 @@ class _HomeScreenState extends State<HomeScreen> {
           elevation: 0,
         ),
         cardTheme: CardTheme(
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
         ),
       ),
       child: Scaffold(
         appBar: AppBar(
-          title: Text('News Headlines', style: TextStyle(fontWeight: FontWeight.bold)),
+          title: Text('News Headlines',
+              style: TextStyle(fontWeight: FontWeight.bold)),
           elevation: 0,
           backgroundColor: Colors.white,
           foregroundColor: Colors.black,
@@ -114,7 +117,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 title: Text('General News'),
                 onTap: () {
                   _fetchNewsByCategory('general');
-                  Navigator.pop(context); // Close the drawer
+                  Navigator.pop(context);
                 },
               ),
               ListTile(
@@ -163,14 +166,16 @@ class _HomeScreenState extends State<HomeScreen> {
         return Card(
           elevation: 4,
           margin: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               ClipRRect(
                 borderRadius: BorderRadius.vertical(top: Radius.circular(12)),
                 child: Image.network(
-                  article['urlToImage'] ?? 'https://via.placeholder.com/300x200',
+                  article['urlToImage'] ??
+                      'https://via.placeholder.com/300x200',
                   height: 200,
                   width: double.infinity,
                   fit: BoxFit.cover,
@@ -237,10 +242,8 @@ class _HomeScreenState extends State<HomeScreen> {
   void _openArticle(String? url) async {
     if (url != null) {
       if (kIsWeb) {
-        
-      //  html.window.open(url, '_blank');
+        //  html.window.open(url, '_blank');
       } else {
-        
         if (await canLaunch(url)) {
           await launch(url);
         } else {
