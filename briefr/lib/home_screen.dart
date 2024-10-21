@@ -36,7 +36,7 @@ class _HomeScreenState extends State<HomeScreen> {
     });
 
     final url = Uri.parse(
-      'https://newsapi.org/v2/top-headlines?country=us&category=$category&apiKey=266b7b14a0574ec8a8084d717d7de16d',
+      'https://newsapi.org/v2/top-headlines?country=us&category=$category&apiKey=API_KEY',
     );
 
     try {
